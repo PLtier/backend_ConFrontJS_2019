@@ -5,9 +5,7 @@ const login = async (req, res, next) => {
     try {
 
         const result = await accountExists(fSponsorName, fPassword);
-        console.log(result, 'out-after');
         const {sponsorName, password} = result;
-        console.log(sponsorName, password);
         generateToken(res, sponsorName, password);
         res.send('a')
 // carry out other actions after generating token like sending a response);

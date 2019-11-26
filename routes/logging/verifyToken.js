@@ -9,9 +9,9 @@ const verifyToken = async (req, res, next) => {
             return res.status(401).json('You need to Login')
         }
         const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
-        req.user = {
-            id: decrypt.id,
-            firstname: decrypt.firstname,
+        req.sponsor = {
+            sponsorName: decrypt.sponsorName,
+            password: decrypt.password,
         };
         next();
     } catch (err) {
