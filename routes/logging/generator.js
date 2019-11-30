@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-//import jwt from 'jsonwebtoken';
 
 const generateToken = (res, sponsorName, password) => {
     const expiration = process.env.DB_ENV === 'testing' ? 86400000 : 604800000;
