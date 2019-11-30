@@ -11,7 +11,7 @@ router
         let {sponsor} = res.locals;
         sponsor.competitions = [];
         sponsor.save();
-        res.send('all stuff deleted')
+        res.send('sponsor data cleared')
     });
 
 module.exports = router;

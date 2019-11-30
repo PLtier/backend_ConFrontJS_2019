@@ -20,7 +20,7 @@ router
             };
         competition.participants.push(newParticipant);
         sponsor.save();
-        res.send('added');
+        res.send('new participant added');
     });
 
 

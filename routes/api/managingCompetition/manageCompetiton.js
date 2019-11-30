@@ -16,7 +16,7 @@ router
         };
         sponsor.competitions.push(newCompetition);
         sponsor.save();
-        res.send("competition has been created")
+        res.send("competition has been created");
 });
 
 
