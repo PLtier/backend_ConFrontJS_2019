@@ -33,8 +33,8 @@ router.post("/", async (req, res) => {
     const msg = {
       to: mail,
       from: "test@example.com",
-        subject: 'test',
-        text:'test',
+        subject: 'Lista uczestników konkursów',
+        text:'To lista Twoich uczestników',
       attachments:[{
           content: data,
           filename: 'data.csv',
