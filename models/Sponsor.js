@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserSchema = require('./User');
+const CompetitionSchema = require('./Competition');
 const Schema = mongoose.Schema;
 
 const SponsorSchema = new Schema({
@@ -15,7 +15,7 @@ const SponsorSchema = new Schema({
 
     },
 
-    participants: [UserSchema],
+    competitions: [CompetitionSchema],
     date: {
         type: Date,
         default: Date.now

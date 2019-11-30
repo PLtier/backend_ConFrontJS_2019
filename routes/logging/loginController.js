@@ -1,16 +1,14 @@
 const generateToken = require('./generator');
 const accountExists = require('./accountExists');
-const login = async (req, res, next) => {
-    let fSponsorName = req.body.sponsorName, fPassword = req.body.password;
-    try {
+const login = async (req, res) => {
 
-        const result = await accountExists(fSponsorName, fPassword);
+    try {
+        const result = await accountExists(req.body.sponsorName, req.body.password);
         const {sponsorName, password} = result;
         generateToken(res, sponsorName, password);
-        res.send('a')
-// carry out other actions after generating token like sending a response);
+        res.send('authentication accepted') //cookies added
     } catch (err) {
-        return res.status(500).json(err.toString());
+        return res.status(500).send('authentication rejected');
     }
 };
 // loginController.js file

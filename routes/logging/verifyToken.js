@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
         };
         next();
     } catch (err) {
-        return res.status(500).json(err.toString());
+        return res.status(500).json('unauthenticated token rejection');
     }
 };
 

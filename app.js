@@ -3,14 +3,17 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const verifyResolveToken = require('./routes/logging/verifyToken');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const resolveSponsor = require('./routes/helpers/resolveSponsors');
 
-// const sendMailRouter = require('./routes/api/sendMail');
-const usersRouter = require('./routes/api/users');
-const sendMailRouter = require('./routes/sendMail');
-const loginRouter = require('./routes/logging/loginRouter');
+const allData = require('./routes/api/allData');
+const manageCompetition = require('./routes/api/managingCompetition/manageCompetiton');
+const sendMailRouter = require('./routes/maling/sendMail');
+const logRouter = require('./routes/logging/logRouter');
 const app = express();
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,9 +34,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Routes
-app.use('/users', usersRouter);
-app.use('/sendmail', sendMailRouter);
-app.use('/login', loginRouter);
+app.use('/competitions', verifyResolveToken, resolveSponsor, manageCompetition); //ready
+app.use('/sendmail', verifyResolveToken, resolveSponsor, sendMailRouter);
+app.use('/log', logRouter); //ready
+app.use('/allData', verifyResolveToken, resolveSponsor, allData); //działa
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -41,7 +46,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
