@@ -4,11 +4,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connectDB = () => {
-    mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-        .then(() => console.log('conntected'))
+    let database = mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+        .then(() => console.log('connected'))
         .catch(err => console.log(err));
     if (process.env.DB_MODE === 'development') {
         mongoose.set('debug', true);
     }
+    return database;
 };
 module.exports = connectDB;
