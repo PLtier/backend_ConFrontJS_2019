@@ -10,8 +10,7 @@ const verifyToken = async (req, res, next) => {
         }
         const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
         req.sponsor = {
-            sponsorName: decrypt.sponsorName,
-            password: decrypt.password,
+            sponsorName: decrypt.sponsorName
         };
         next();
     } catch (err) {

@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const generateToken = (res, sponsorName, password) => {
+const generateToken = (res, sponsorName) => {
     const expiration = process.env.DB_ENV === 'testing' ? 86400000 : 604800000;
-    const token = jwt.sign({ sponsorName, password }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ sponsorName}, process.env.JWT_SECRET, {
         expiresIn: process.env.DB_ENV === 'testing' ? '1d' : '7d',
     });
     res.cookie('token', token, {

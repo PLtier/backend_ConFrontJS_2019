@@ -5,9 +5,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const verifyResolveToken = require('./routes/logging/verifyToken');
 const logger = require('morgan');
-const mongoose = require('mongoose');
 const resolveSponsor = require('./routes/helpers/resolveSponsors');
-
+const connectDB = require('./config/dbConnection');
 const allData = require('./routes/api/allData');
 const manageCompetition = require('./routes/api/managingCompetition/manageCompetiton');
 const sendMailRouter = require('./routes/maling/sendMail');
@@ -55,9 +54,7 @@ app.use(function(err, req, res) {
   res.status(err.status || 500);
 });
 
+//connect to db
+connectDB();
 
-const db = require('./config/keys').mongoURI;
-mongoose.connect(db, {useNewUrlParser: true})
-    .then(() => console.log('conntected'))
-    .catch(err => console.log(err));
 module.exports = app;

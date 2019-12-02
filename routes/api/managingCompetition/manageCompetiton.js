@@ -1,19 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const users = require('./users');
+const Competition = require('../../../models/Competition');
 
-
-const Sponsor = require("../../../models/Sponsor");
-
+const {model} = require("../../../models/Sponsor");
+const Sponsor = model;
 
 router
     .post('/', (req, res) => {
     let {sponsor} = res.locals,
-        {competitionName} = req.body,
-        newCompetition = {
-            competitionName,
-            participants: []
-        };
+        //w body jest competition name
+        newCompetition = new Competition.model(req.body);
         sponsor.competitions.push(newCompetition);
         sponsor.save();
         res.send("competition has been created");

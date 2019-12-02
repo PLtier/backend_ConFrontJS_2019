@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserSchema = require('./User');
+const User = require('./User');
 const Schema = mongoose.Schema;
 
 const CompetitionSchema = new Schema({
@@ -7,7 +7,12 @@ const CompetitionSchema = new Schema({
         type: String,
         required: true
     },
-    participants: [UserSchema]
+    participants: [User.schema]
 });
 
-module.exports = CompetitionSchema;
+const Competition = mongoose.model('competition', CompetitionSchema);
+
+module.exports = {
+    schema: CompetitionSchema,
+    model: Competition
+};
