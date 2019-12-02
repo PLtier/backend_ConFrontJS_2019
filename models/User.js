@@ -12,9 +12,10 @@ const UserSchema = new Schema({
     },
     mail: {
         type: String,
-        required: true,
-        unique: true
+        required: true
+        // unique: true
     },
+
 
     date: {
         type: Date,
@@ -22,4 +23,9 @@ const UserSchema = new Schema({
     }
 });
 
-module.exports = UserSchema;
+const User = mongoose.model('user', UserSchema);
+
+module.exports = {
+    schema: UserSchema,
+    model: User
+};

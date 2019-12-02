@@ -1,5 +1,5 @@
-const Sponsor = require('../../models/Sponsor');
-
+const {model} = require('../../models/Sponsor');
+const Sponsor = model;
 
 const getSponsor = (req, res, next) => {
     let sponsor = req.sponsor;

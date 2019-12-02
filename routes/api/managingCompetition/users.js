@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const {model} = require('../../../models/User');
+const User = model;
 // const verifyResolveToken = require("../logging/verifyToken");
 /* GET users listing. */
 
@@ -12,12 +14,7 @@ router
     })
     .post((req, res) => {
         let {sponsor, competition} = res.locals;
-        const {first_name, last_name, mail} = req.body,
-            newParticipant = {
-                first_name,
-                last_name,
-                mail
-            };
+        const newParticipant = new User(req.body);
         competition.participants.push(newParticipant);
         sponsor.save();
         res.send('new participant added');
