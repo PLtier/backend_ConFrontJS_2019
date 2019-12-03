@@ -1,17 +1,20 @@
-const express = require("express");
-const router = express.Router();
-
 router
     .route('/')
     .get((req, res) => {
-        let {sponsor} = res.locals;
-        res.json(sponsor.competitions)
+        try {
+            let {sponsor} = res.locals;
+            res.json(sponsor.competitions)
+        } catch (err) {
+            res.status(500).send(err.toString());
+        }
     })
     .delete((req, res) => {
-        let {sponsor} = res.locals;
-        sponsor.competitions = [];
-        sponsor.save();
-        res.send('sponsor data cleared')
+        try {
+            let {sponsor} = res.locals;
+            sponsor.competitions = [];
+            sponsor.save();
+            res.send('sponsor data cleared')
+        } catch (err) {
+            res.status(500).send(err.toString());
+        }
     });
-
-module.exports = router;
